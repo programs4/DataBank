@@ -1,0 +1,93 @@
+﻿/*MAIN*/
+
+.logout {
+    float: right;
+}
+
+.chats li img {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.chats li p {
+    font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+.chats li {
+    padding: 10px;
+    overflow: auto;
+}
+
+    .chats li:hover {
+        background: #eee;
+        cursor: pointer;
+    }
+
+    .chats li a {
+        color: #0ca3cc;
+        text-decoration: none;
+    }
+
+        .chats li a:hover {
+            color: #9a9696;
+            text-decoration: none;
+        }
+
+
+.online-btn, .online-content {
+    position: fixed !important;
+    background: #008BC7;
+    padding: 5px 20px 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 17px;
+    box-shadow: 0 0 20px 0px #aeaeae;
+    right: 22px;
+    bottom: 25px;
+    z-index: 99999;
+    display: none; /*
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.3s linear;*/
+}
+
+
+.online-btn {
+    cursor: pointer;
+    display: inline-block;
+    width: 424px;
+    padding-top: 10px;
+}
+
+
+    .online-btn img, .online-content .oc-header img {
+        position: relative;
+        margin-right: 5px;
+    }
+
+.online-content .oc-header {
+    margin: 5px 0;
+}
+
+.online-content .oc-body {
+    border-radius: 5px;
+    background: #ffffff;
+    width: 270px;
+    height: 290px;
+    margin: 20px 0 0 0;
+}
+
+    .online-content .oc-body iframe {
+        border-radius: 5px;
+    }
+
+.oc-operator {
+    font-size: 18px;
+}
+
+.online-content {
+    width: 270px;
+    height: 350px;
+}

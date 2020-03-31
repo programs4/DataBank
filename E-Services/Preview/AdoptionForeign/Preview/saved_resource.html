@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://services.e-gov.az/services/IMEICheckStatus/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	EGOV Services
+</title><link rel="stylesheet" type="text/css" href="./bootstrap.css"><link rel="stylesheet" type="text/css" href="./bootstrap-datetimepicker.css"><link rel="stylesheet" type="text/css" href="./styles.css">
+
+    <script type="text/javascript" src="./jquery.js.download"></script>
+    <script type="text/javascript" src="./bootstrap.js.download"></script>
+    <script type="text/javascript" src="./bootstrap-datetimepicker.js.download"></script>
+
+    <script type="text/javascript">
+
+        function Onload() {
+            document.getElementById("egovBox").style.display = "block";
+        }
+        if (window.addEventListener)
+            window.addEventListener("load", Onload, false);
+        else if (window.attachEvent)
+            window.attachEvent("onload", Onload);
+        else window.onload = Onload;
+
+        //No iframe
+        if (window == top) {
+            top.location.replace('/error/catch');
+        }
+
+        function Loading(Element) {
+            Element.style.display = 'none';
+            document.getElementById('loading').style.display = '';
+        }
+
+    </script>
+
+    
+<link href="./WebResource.axd" rel="stylesheet" type="text/css"></head>
+<body>
+    <form method="post" action="https://services.e-gov.az/services/IMEICheckStatus/" id="AspnetForm">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="iGm7x5dR/WECOipluabpfKDgQJgmx2jB2PASepnCLqtyX4FvDMdQfW3GokUIjjn5yGOsriJm73zvyAP/BgW7IztRQVVqqZqv92WtyBWkCbBpbMG7MAgF+SNvz7lIPf1hboRx/y27+tD9Yb9lNbiycy+1jF+TYhVWrEadvX7WkGERpoA4upUh8Q3RkMocT9ootYlfBj0N/pi+YlxPFQpsjT86KI5tJkhyh2CoF9U3Ti5I66GY6HE91/cTq7tljkem">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['AspnetForm'];
+if (!theForm) {
+    theForm = document.AspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./WebResource(1).axd" type="text/javascript"></script>
+
+
+<script src="./WebResource(2).axd" type="text/javascript"></script>
+<script src="./WebResource(3).axd" type="text/javascript"></script>
+<script src="./ScriptResource.axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="./ScriptResource(1).axd" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="76C69F54">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="8mRMdCYnijb8ripmXYZaPOx8I9AfiG4Kq6VUp6B/+f6DTGrOCZ6cM8FeNrAaVQH0/cMlLh2TUmA+bFpf/6rWyfU5lWk4qxP2uWLKH/T5c9f/vulk9nRMhV+ftNe0wazzTJP5gQUBxcYSxquzHvz26g==">
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'AspnetForm', ['tctl00$ContentPlaceHolderBody$UpdatePanel1','ContentPlaceHolderBody_UpdatePanel1'], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+        <div class="content">
+            <div id="egovBox" style="display: block;">
+                
+    <div id="ContentPlaceHolderBody_UpdatePanel1">
+	
+
+            <div id="ContentPlaceHolderBody_PnlStatus_holder" class="status_holder">
+		
+                
+
+                <div id="ContentPlaceHolderBody_PnlStatus_left" class="imei_status_left">
+			
+                    <label class="status_blue">
+                        Mobil cihazın IMEI nömrəsi: <span style="color: red;">*</span></label>
+
+                    <table class="nav-justified">
+                        <tbody><tr>
+                            <td style="width: 320px">
+                                <div id="blur"></div>
+			<div id="dvContentPlaceHolderBody_TxtIMEI">
+				<input name="ctl00$ContentPlaceHolderBody$TxtIMEI" type="text" maxlength="15" id="ContentPlaceHolderBody_TxtIMEI" class="status_input status_input300 write isNumeric">
+			</div>
+                            </td>
+                            <td>
+                                <input type="submit" name="ctl00$ContentPlaceHolderBody$BtnCheckStatus" value="Yoxla" onclick="Loading(this);" id="ContentPlaceHolderBody_BtnCheckStatus" class="status_button">
+                                <img src="./loading.gif" style="width: 50px; display: none;" id="loading">
+                            </td>
+                        </tr>
+                    </tbody></table>
+
+                    <span id="ContentPlaceHolderBody_LblExample" class="imei_status_info_label">- yalnız rəqəm və 15 simvoldan ibarət məlumat.</span>
+                
+		</div>
+                <div id="ContentPlaceHolderBody_PnlStatus_right" class="imei_status_right">
+			
+                    <img src="./imei_status_phone.png">
+                    <p>
+                        
+                    Mobil cihazın IMEI nömrəsini öyrənmək üçün mobil telefondan *#06# düymələrini sıxın.
+                        
+                    </p>
+                
+		</div>
+            
+	</div>
+
+        
+</div>
+
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        function afterAsyncPostBack() {
+            var desiredHeight = document.getElementById('egovBox').offsetHeight + 20;
+            var desiredWidth = document.getElementById('egovBox').offsetWidth;
+            var message = {
+                width: desiredWidth,
+                height: desiredHeight
+            };
+            window.parent.postMessage(JSON.stringify(message), '*');
+        }
+        afterAsyncPostBack();
+        setInterval(function () { afterAsyncPostBack(); }, 100);
+    </script>
+
+
+</body></html>

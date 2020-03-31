@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Adminn_MasterPage" %>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<head id="Head1" runat="server">
+    <title>Elektron Məlumat Bankı </title>
+
+    <!-- CSS -->
+    <link href="/Css/normalize.css" rel="stylesheet">
+    <link href="/Css/styles.css" rel="stylesheet">
+
+    <%=@"<link href=""/Css/bootstrap.css"" rel=""stylesheet"" type=""text/css"" />
+         <link href=""/Css/bootstrap-theme.css"" rel=""stylesheet"" />" %>
+
+    <script type="text/javascript" src="/Js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Js/custom.js"></script>
+
+    <link rel="shortcut icon" href="/Favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="description" lang="az" content="">
+    <meta name="keywords" lang="az" content="">
+    <meta name="robots" content="index, follow">
+
+    <!--  Mobile Viewport Fix -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script language="javascript" type="text/javascript">
+        function SetLeftBlackPanel() {
+            $('.mainmenu').css("height", document.body.scrollHeight);
+        }
+
+        $(window).resize(function () {
+            SetLeftBlackPanel();
+        });
+
+    </script>
+    <script src="/Js/AlertPopup.js"></script>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterHead" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body class="bodyFixPadding" onload="SetLeftBlackPanel();">
+
+    <form id="AspnetForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <div id="alertMessage" class="MessageAlert" style="display: none;">
+            <img id="alertImg" style="margin-bottom: 5px; height: 30px">
+            <span id="alertText">Məlumatlar yeniləndi</span>
+        </div>
+
+        <asp:Panel ID="PnlHeaderRoot" runat="server" Style="min-width: 780px; background-color: #2C3849; box-shadow: 0px 5px 15px #999999;" CssClass="divHeader">
+
+            <div class="hd-left">
+                <figure><img src="/Pics/Logo.png" /></figure>
+                <span>UŞAQ HÜQUQLARININ HƏYATA KEÇİRİLMƏSİNƏ DAİR
+                    <br>
+                    <span>MƏLUMAT BANKI</span> </span>
+            </div>
+
+        </asp:Panel>
+
+
+        <asp:Panel ID="PnlLeft" runat="server" CssClass="mainmenu" Style="display: none; z-index: 99999">
+
+            <a href="/adminn/tools/?p=main" class="m-item">
+                <img src="/pics/leftmenuicon/setting.png" />
+                <span class="um-text">Tənzimləmələr</span>
+            </a>
+
+            <a href="/adminn/tools/?p=users" class="m-item">
+                <img src="/pics/leftmenuicon/persons.png" />
+                <span class="um-text">İstifadəçilər</span>
+            </a>
+
+            <a href="/adminn/tools/?p=list" class="m-item">
+                <img src="/pics/leftmenuicon/list.png" />
+                <span class="um-text">Sorağçalar</span>
+            </a>
+
+             <a href="/adminn/tools/?p=usershistory" class="m-item">
+                <img src="/pics/leftmenuicon/history.png" />
+                <span class="um-text">Tarixçə</span>
+            </a>
+
+            <a href="/adminn" class="m-item">
+                <img src="/pics/leftmenuicon/logout.png" />
+                <span class="um-text">Çıxış</span>
+            </a>
+
+        </asp:Panel>
+
+        <asp:Panel ID="PnlContent" runat="server" CssClass="content" Style="padding-top: 10px; margin-top: 80px; margin-left: 245px;">
+            <!-- all content here -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </asp:Panel>
+    </form>
+</body>
+</html>

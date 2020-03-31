@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html>
+
+<script runat="server">
+
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Web Projects</title>
+    <link href="/Css/styles.css" rel="stylesheet" type="text/css" />
+
+    <%=@"<link href=""/Css/bootstrap.css"" rel=""stylesheet"" type=""text/css"" />
+         <link href=""/Css/bootstrap-theme.css"" rel=""stylesheet"" />" %>
+
+    <script type="text/javascript" src="/Js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/Js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+
+        function Onload() {
+            document.getElementById("egovBox").style.display = "block";
+        }
+        if (window.addEventListener)
+            window.addEventListener("load", Onload, false);
+        else if (window.attachEvent)
+            window.attachEvent("onload", Onload);
+        else window.onload = Onload;
+
+    </script>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="AspnetForm" runat="server">
+        <div style="width: 98%; margin-right: auto; margin-left: auto;">
+            <div id="egovBox" style="min-height: 600px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterBody" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        function afterAsyncPostBack() {
+            var desiredHeight = document.getElementById('egovBox').offsetHeight + 20;
+            var desiredWidth = document.getElementById('egovBox').offsetWidth;
+            var message = {
+                width: desiredWidth,
+                height: desiredHeight
+            };
+            window.parent.postMessage(JSON.stringify(message), '*');
+        }
+        afterAsyncPostBack();
+        setInterval(function () { afterAsyncPostBack(); }, 100);
+    </script>
+</body>
+</html>

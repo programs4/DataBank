@@ -1,0 +1,1762 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.e-gov.az/az/services/read/3130/0 -->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Mobil cihazların IMEI kodunun yoxlanılması</title>
+    <meta name="description" lang="az" content="">
+    <meta name="keywords" lang="az" content="">
+    <meta name="robots" content="index, follow">
+    <!-- The Open Graph protocol -->
+    <meta property="og:title" content="">
+    <meta property="og:url" content="">
+    <meta property="og:description" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:type" content="">
+    <meta property="og:image" content="/ContentNew/Pics/logo.png">
+    <!--  Mobile Viewport Fix -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://www.e-gov.az/ContentNew/Pics/favicon.ico">
+    <link href="Preview/jquery-ui.css" rel="stylesheet">
+    <link href="Preview/css" rel="stylesheet" type="text/css">
+    <script async="" src="Preview/analytics.js.download"></script>
+    <script src="Preview/jquery-1.9.1.js.download"></script>
+    <script src="Preview/jquery-ui.js.download"></script>
+    <script src="Preview/typeahead.bundle.js.download"></script>
+
+    <!-- CSS -->
+    <link href="Preview/normalize.css" rel="stylesheet">
+    <link href="Preview/typeaheadjs.css" rel="stylesheet">
+    <link href="Preview/style.css" rel="stylesheet">
+
+    <link href="Preview/bootstrap.min.css" rel="stylesheet">
+    <link href="Preview/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="Preview/bootstrap-dialog.min.css" rel="stylesheet">
+    <script src="Preview/bootstrap.min.js.download"></script>
+    <script src="Preview/bootstrap-dialog.min.js.download"></script>
+    <script src="Preview/jquery.cookie.js.download"></script>
+
+
+
+    <link href="Preview/style(1).css" rel="stylesheet">
+    <script src="Preview/jquery.ThreeDots.min.js.download"></script>
+    <link href="Preview/flipclock.css" rel="stylesheet">
+    <script src="Preview/flipclock.js.download"></script>
+    <style>
+        .ui-widget {
+            font-family: inherit !important;
+            font-size: 14px !important;
+        }
+
+        .my-folders ul li {
+            padding: 5px 15px 10px 10px;
+            margin: 0 15px 10px 0;
+        }
+
+        .imgDelete {
+            -ms-transform: rotate(45deg); /* IE 9 */
+            -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+            transform: rotate(45deg);
+        }
+
+        .imgCancel {
+            -ms-transform: rotate(45deg); /* IE 9 */
+            -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+            transform: rotate(45deg);
+        }
+
+        #aAddGroup img {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        .editedMyTopic {
+            padding: 0px 0 20px 0 !important;
+            height: 39px;
+            background-color: #F5F5F5 !important;
+        }
+
+        #width_tmp {
+            display: none;
+        }
+
+        .first-hd .message {
+            width: 650px !important;
+        }
+
+        .logened-user span.citizen {
+            color: white !important;
+        }
+
+        .lang {
+            float: left;
+            padding: 2px;
+            cursor: pointer;
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        .langActive {
+            background-color: #5A5A5A;
+        }
+
+        .flip-clock-wrapper a {
+            float: none !important;
+            display: initial !important;
+        }
+
+        .flip-clock-wrapper ul li {
+            line-height: 24px !important;
+        }
+
+            .flip-clock-wrapper ul li a div div.inn {
+                font-size: 14px !important;
+            }
+
+        .flip-clock-wrapper ul {
+            height: 24px !important;
+            width: 16px !important;
+        }
+
+        .flip-clock-wrapper .flip {
+            box-shadow: 0 0px 0 #0068CF !important;
+            border: 1px solid #B7B7B7 !important;
+        }
+
+        .sh-right {
+            margin: 19px 0 0 0 !important;
+        }
+    </style>
+
+    <!-- JS -->
+    <!-- Google Fonts embed code -->
+    <script type="text/javascript">
+
+        function getSelectionText() {
+            highlightedText = "";
+            if (window.getSelection) {
+                highlightedText = window.getSelection().toString();
+            } else if (document.selection && document.selection.type != "Control") {
+                highlightedText = document.selection.createRange().text;
+            }
+            return highlightedText;
+        }
+
+        function KeyPress(e) {
+            var evtobj = window.event ? event : e
+            if (evtobj.keyCode == 13 && evtobj.ctrlKey) {
+                //alert("Ctrl+Enter");
+                //alert(getSelectionText());
+
+                if (getSelectionText().trim().length > 0) {
+                    $('#frmErrorTextModalBody')[0].reset();
+                    $("#taErrorSelectedText").val(getSelectionText().trim());
+                    $("#myErrorTextModal").modal("show");
+                }
+            }
+        }
+
+        document.onkeydown = KeyPress;
+
+        var serviceUsageCount, callCount;
+
+        var serviceUsageCountUsed = 1, callCountUsed = 1;
+        function ServiceUsageCount(time) {
+
+            if (serviceUsageCountUsed == 1) {
+                serviceUsageCount = new FlipClock($('#spnServiceUsageCountNewChild'), 10000000, {
+                    clockFace: 'Counter'
+                });
+            }
+
+            setTimeout(function () {
+                $.ajax({
+                    url: "/az/home/JSGetServiceUsageCount/",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                    success: function (result) {
+                        serviceUsageCount.setValue(result.UsageCount);
+
+                        if (serviceUsageCountUsed == 1) {
+                            setTimeout(function () {
+                                $("#spnServiceUsageCountNew img").remove();
+                                $("#spnServiceUsageCountNewChild").css("visibility", "visible");
+
+                                ServiceUsageCount(10);
+                            }, 1000);
+
+                        }
+
+                        serviceUsageCountUsed++;
+
+                        if (result.message == "OK") {
+                            ServiceUsageCount(2000);
+                        }
+                        else {
+                            console.log("Error in catch");
+                            ServiceUsageCount(2000);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        console.log("Error: " + errorThrown);
+                    }
+                });
+            }, time);
+        }
+
+
+        function CallCount(time) {
+
+            if (callCountUsed == 1) {
+                callCount = new FlipClock($('#divCallCountNewChild'), 100, {
+                    clockFace: 'Counter'
+                });
+            }
+
+            setTimeout(function () {
+                $.ajax({
+                    url: "/az/home/JSGetCallCount/",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                    success: function (result) {
+                        callCount.setValue(result.callCount);
+
+                        if (callCountUsed == 1) {
+                            setTimeout(function () {
+                                $("#divCallCountNew img").remove();
+                                $("#divCallCountNewChild").css("visibility", "visible");
+
+                                CallCount(10);
+                            }, 1000);
+                        }
+
+                        callCountUsed++;
+
+                        if (result.message == "OK") {
+                            CallCount(2000);
+                        }
+                        else {
+                            console.log("Error in catch");
+                            CallCount(2000);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        console.log("Error: " + errorThrown);
+                    }
+                });
+            }, time);
+        }
+
+
+
+
+        $(document).ready(function () {
+
+            ServiceUsageCount(1000);
+            CallCount(1000);
+
+            $(".lang").removeClass("langActive");
+            $(".lang[lang='az']").addClass("langActive");
+
+
+            $("#min").click(function () {
+
+                $('.online-content').fadeOut();
+                //$('.online-content').css('right','-500px');
+                $('.online-btn').show();
+            });
+
+            var activeCert = '';
+
+            $("#slcCerts").val(activeCert);
+            $("#width_tmp").html($('#slcCerts option:selected').text());
+            $("#slcCerts").width($("#width_tmp").width() + 30);
+
+
+            $('#slcCerts').change(function () {
+
+                $("#width_tmp").html($('#slcCerts option:selected').text());
+                $(this).width($("#width_tmp").width() + 30);
+
+                $.ajax(
+                    {
+                        url: "/az/home/JSChangeCertificate/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            id: $(this).val()
+                        },
+                        success: function (result) {
+                            if (result.data == "OK") {
+                                location.reload();
+                            }
+                        }
+                    });
+
+            });
+
+
+            //var the_obj = $('div.es-desc').ThreeDots({
+            //    max_rows: 3
+            //});
+
+            //BootstrapDialog.alert('I want banana!');
+
+            $("#btnSendErrorTextModal").click(function () {
+                $.ajax(
+                    {
+                        url: "/az/home/JSAddSelectedError/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: $("#frmErrorTextModalBody").serialize(),
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $('#frmErrorTextModalBody')[0].reset();
+                                $("#myErrorTextModal").modal("hide");
+
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_SUCCESS,
+                                    title: 'Məlumat',
+                                    message: "Xəta g&#246;ndərildi"
+                                });
+                            }
+                            else {
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_DANGER,
+                                    title: 'Xəta',
+                                    message: result.message,
+                                    buttons: [{
+                                        label: 'Bağla',
+                                        cssClass: 'btn-danger',
+                                        action: function (dialogItself) {
+                                            dialogItself.close();
+                                        }
+                                    }]
+                                });
+                            }
+                        }
+                    });
+            });
+
+
+            $("body").delegate("#ulGroupList li a.aDeleteMyTopic", "click", function () {
+                //$('#ulGroupList li a.aDeleteMyTopic').click(function () {
+
+                var myTopicID = $(this).closest("li").attr("mytopicid");
+                var topicName;
+
+                $(this).closest("li").find("span.icons").hide();
+
+                $.ajax(
+                    {
+                        url: "/az/services/JSGetTopicName/",
+                        type: 'POST',
+                        dataType: 'json',
+                        async: false,
+                        data:
+                        {
+                            topicId: myTopicID
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                topicName = result.name;
+                            }
+                            else {
+                                alert(result.message);
+                            }
+                        }
+                    });
+
+
+                BootstrapDialog.show({
+                    title: 'Xəbərdarlıq',
+                    type: BootstrapDialog.TYPE_DANGER,
+                    message: 'az' == 'en' ? ('Do you want delete <span style="font-weight:bold; font-size: 16px;">"' + topicName + '"</span> service group?') : ('Siz <span style="font-weight:bold; font-size: 16px;">"' + topicName + '"</span> xidmət qrupunu silmək istəyirsiniz ?'),
+                    buttons: [{
+                        label: 'Xeyr',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }, {
+                        label: '&nbsp;Bəli&nbsp;',
+                        cssClass: 'btn-danger',
+                        action: function (dialog) {
+                            $.ajax(
+                                {
+                                    url: "/az/services/JSDeleteMyTopic/",
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    async: false,
+                                    data:
+                                    {
+                                        topicId: myTopicID
+                                    },
+                                    success: function (result) {
+                                        if (result.message == "OK") {
+                                            if (result.id != '') {
+                                                if (result.id == -1) {
+                                                    window.location.assign('/az/services/index');
+                                                }
+                                                else {
+                                                    window.location.assign('/az/services/mytopic/' + result.id);
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            BootstrapDialog.show({
+                                                type: BootstrapDialog.TYPE_DANGER,
+                                                title: 'Xəta',
+                                                message: result.message,
+                                                buttons: [{
+                                                    label: 'Bağla',
+                                                    cssClass: 'btn-danger',
+                                                    action: function (dialogItself) {
+                                                        dialogItself.close();
+                                                    }
+                                                }]
+                                            });
+                                        }
+                                    }
+                                });
+                        }
+                    }]
+                });
+
+
+            });
+
+
+            $("body").delegate("a.aCancelEdit", "click", function () {
+                //$("a.aCancelEdit").click(function () {
+
+                $(this).closest("li").removeClass("editedMyTopic");
+                $(this).closest("li").children().show();
+                $("span.serv-arrow").show();
+                $("#aAddGroup").closest("li").show();
+
+                $(this).closest("li").find(".icons").hide();
+
+                $(this).closest("li").find("div.divForTopicEdit").remove();
+
+                $('.manage-folders').removeAttr('style');
+
+            });
+
+
+            $("body").delegate("#aGroupSaveChange", "click", function () {
+                var ths = $(this);
+                var myTopicID = ths.closest("li").attr("mytopicid");
+                if ($("#txtEditGroupName").val().length > 2) {
+                    //alert(response);
+
+                    $.ajax(
+                    {
+                        url: "/az/services/JSEditMyTopicName/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            name: $("#txtEditGroupName").val(),
+                            topicId: myTopicID
+                        },
+                        success: function (result) {
+                            if (result.data == "OK") {
+
+                                ths.closest("li").removeClass("editedMyTopic");
+                                ths.closest("li").children().show();
+                                $("span.serv-arrow").show();
+                                $("#aAddGroup").closest("li").show();
+
+                                ths.closest("li").find(".icons").hide();
+
+                                ths.closest("li").find("a:first").text($("#txtEditGroupName").val());
+
+                                ths.closest("li").find("div.divForTopicEdit").remove();
+
+                                $('.manage-folders').removeAttr('style');
+                                //$("#dialog1").dialog("close");
+                                //location.reload();
+                            }
+                            else {
+                                //alert("Sistemə daxil olmalısınız")
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_DANGER,
+                                    title: 'Xəta',
+                                    message: result.data,
+                                    buttons: [{
+                                        label: 'Bağla',
+                                        cssClass: 'btn-danger',
+                                        action: function (dialogItself) {
+                                            dialogItself.close();
+                                        }
+                                    }]
+                                });
+                            }
+                        }
+                    });
+
+                }
+                else {
+                    BootstrapDialog.show({
+                        type: BootstrapDialog.TYPE_DANGER,
+                        title: 'Xəta',
+                        message: 'Qrupunun adı ən azı 3 simvoldan ibarət olmalıdır',
+                        buttons: [{
+                            label: 'Bağla',
+                            cssClass: 'btn-danger',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
+                    });
+                    ////alert("Qrupunun adı ən azı 3 simvoldan ibarət olmalıdır");
+                    //$("#pError").text("Qrupunun adı ən azı 3 simvoldan ibarət olmalıdır");
+                }
+            });
+
+
+            $("body").delegate("#ulGroupList li a.aEditMyTopic", "click", function () {
+                //$('#ulGroupList li a.aEditMyTopic').click(function () {
+                var myTopicID = $(this).closest("li").attr("mytopicid");
+                //$('#aAddGroup').click();
+
+                $("#aAddGroup").closest("li").hide();
+                $("span.serv-arrow").hide();
+                $(this).closest("li").children().hide();
+                $(this).closest("li").append('<div class="manage-folders divForTopicEdit" style="margin: 5px 0 0 -12px; padding: 0;"><a class="new-folder aCancelEdit" title="Ləğv et" style="cursor: pointer; margin-right: 8px;"> <img src="/ContentNew/Pics/plus.png" title="Ləğv et" class="imgCancel"> </a><input id="txtEditGroupName" type="text"> <a id="aGroupSaveChange" class="folder-ok"><img src="/ContentNew/Pics/serv-ok.png" title="Yadda saxla" style="cursor:pointer;"></a></div>');
+                $(this).closest("li").addClass("editedMyTopic");
+
+                $.ajax(
+                        {
+                            url: "/az/services/JSGetTopicName/",
+                            type: 'POST',
+                            dataType: 'json',
+                            data:
+                            {
+                                topicId: myTopicID
+                            },
+                            success: function (result) {
+                                if (result.message == "OK") {
+                                    $("#txtEditGroupName").val(result.name);
+                                    $('.manage-folders').css('display', 'inline-block');
+                                    //$("#dialog1").dialog("open");
+                                }
+                                else {
+                                    alert("Sistemə daxil olmalısınız")
+                                }
+                            }
+                        });
+            });
+
+
+
+            var keywords = new Bloodhound({
+                datumTokenizer: function (datum) {
+                    return Bloodhound.tokenizers.whitespace(datum.value);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                limit: 100,
+                remote: {
+                    url: '/az/Home/AutoCompleteNew?search=%QUERY',
+                    filter: function (keywords) {
+                        // Map the remote source JSON array to a JavaScript object array
+                        return $.map(keywords, function (keyword) {
+                            if (keyword.additional == '') {
+                                return {
+                                    label: keyword.title,
+                                    value: keyword.title
+                                };
+                            }
+                            else {
+                                return {
+                                    label: '<span style="color:gray; ">' + keyword.title + '</span>' + '<br/><span style="font-size:14px; font-style:italic;">' + keyword.additional + '</span>',
+                                    value: keyword.title
+                                };
+                            }
+                        });
+                    }
+                }
+            });
+
+            keywords.initialize();
+
+            $('input#keywords').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 3,
+                }, {
+                    name: 'keywords',
+                    displayKey: 'value',
+                    source: keywords.ttAdapter(),
+                    templates: {
+                        suggestion: function (item) { return '<p style="white-space: normal;">' + item.label + '</p>'; }
+                    }
+                }).on('typeahead:selected', function (obj, datum) {
+
+                    //$('.src input').val(datum.label.replace(/(<([^>]+)>)/ig, ""));
+                    //$('input#keywords').attr('data-type', datum.type);
+
+                    $("#frmSearch button").click();
+
+                });
+
+        });
+
+        (function () {
+            var link_element = document.createElement("link"),
+                s = document.getElementsByTagName("script")[0];
+            if (window.location.protocol !== "http:" && window.location.protocol !== "https:") {
+                link_element.href = "http:";
+            }
+            link_element.href += "//fonts.googleapis.com/css?family=Noto+Sans:400italic,400,700italic,700";
+            link_element.rel = "stylesheet";
+            link_element.type = "text/css";
+            s.parentNode.insertBefore(link_element, s);
+        })();
+    </script>
+
+
+
+
+
+
+    <script type="text/javascript">
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            url = url.toLowerCase(); // This is just to avoid case sensitiveness
+            name = name.replace(/[\[\]]/g, "\\$&").toLowerCase();// This is just to avoid case sensitiveness for query parameter name
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+
+        var desiredHeight;
+        var desiredWidth;
+        function onMessage(event) {
+
+            var message = JSON.parse(event.data);
+            desiredHeight = message.height;
+            desiredWidth = message.width;
+
+            //if (tempHeight != desiredHeight) {
+            //   tempHeight = desiredHeight;
+            ////document.getElementById('ServiceScreen').style.height = desiredHeight * 1.1 + 'px';
+            var serviceID = '3130';
+            var serviceIdList = ['3493'];
+            if (serviceIdList.indexOf(serviceID) != -1) {
+                document.getElementById('ServiceScreen').style.height = desiredHeight + 'px';
+            }
+            else {
+                document.getElementById('ServiceScreen').style.height = desiredHeight * 1.1 + 'px';
+            }
+            //}
+
+        }
+
+        if (window.attachEvent)
+            window.attachEvent('onmessage', onMessage);
+        else if (window.addEventListener)
+            window.addEventListener('message', onMessage, false);
+
+    </script>
+    <script type="text/javascript">
+
+        var serviceMessage = '';
+
+
+
+        function numberWithSpace(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        var showIframeOnSuccess = true;
+        function CheckTokenUsed(token, timeout) {
+            setTimeout(function () {
+                $.ajax({
+                    url: "/az/services/JSCheckTokenUsed/",
+                    type: 'POST',
+                    dataType: 'json',
+                    data:
+                    {
+                        token: token,
+                        serviceID: '3130'
+                    },
+                    success: function (result) {
+                        if (result.message == "OK") {
+                            if (showIframeOnSuccess == true) {
+                                $("#ServiceScreen").show();
+                            }
+                            $("#ServiceLoading").hide();
+                            $("#errorFrame").text("");
+                            $("#errorFrame").hide();
+                        }
+                        else {
+                            $("#ServiceScreen").hide();
+                            $("#ServiceLoading").hide();
+                            $("#errorFrame").html("Xidmətin y&#252;klənməsi m&#252;mk&#252;n olmadı (Token yoxlanılması xətası)");
+
+                            //console.log("Xidmətin yüklənməsi mümkün olmadı (Token yoxlanılması xətası)");
+                            //console.log("Token : " + token);
+                            //console.log("result.message : " + result.message);
+                            //console.log("result.tokenType : " + result.tokenType.tokenType);
+                            //console.log("result.serviceID : " + result.serviceID);
+
+                            if (!$("#divRedirectButton").is(':visible') && !$("#ServiceHttpError").is(':visible')) {
+                                $("#errorFrame").show();
+                                CheckTokenUsed(token, 2000);
+                            }
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        console.log("Error: " + errorThrown);
+                    }
+                });
+            }, timeout);
+        }
+
+
+        //function checkNetConnection(url) {
+        //    alert(url);
+        //    var xhr = new XMLHttpRequest();
+        //    //var file = "https://www.e-gov.az/";
+        //    xhr.open('HEAD', url, false);
+        //    try {
+        //        xhr.send();
+        //        if (xhr.status >= 200 && xhr.status < 304) {
+        //            return true;
+        //        } else {
+        //            return false;
+        //        }
+        //    } catch (e) {
+        //        return false;
+        //    }
+        //}
+
+        //function doesConnectionExist(url) {
+        //    var xhr = new XMLHttpRequest();
+        //    var file = url;
+        //    var randomNum = Math.round(Math.random() * 10000);
+
+        //    xhr.open('HEAD', file + "?rand=" + randomNum, false);
+
+        //    try {
+        //        xhr.send();
+
+        //        if (xhr.status >= 200 && xhr.status < 304) {
+        //            return true;
+        //        } else {
+        //            return false;
+        //        }
+        //    } catch (e) {
+        //        return false;
+        //    }
+        //}
+
+        ////var iframeError;
+
+        ////function IframeError() {
+        ////    //alert('IframeError');
+
+        ////    if (navigator.appName == 'Microsoft Internet Explorer') {
+        ////        window.frames[0].document.execCommand('Stop');
+        ////    } else {
+        ////        window.frames[0].stop();
+        ////    }
+
+        ////    $("#ServiceLoading").hide();
+        ////    $("#errorFrame").text("Xidmətin yüklənməsi mümkün olmadı (İnternet əlaqəsi xətası)");
+        ////    $("#errorFrame").show();
+        ////}
+
+        $(document).ready(function () {
+
+            $("#go").click(function () {
+                $("#divModalSendMessage .alert-danger").text('');
+                $("#divModalSendMessage .alert-danger").hide();
+                FeedBackOnBegin();
+                $("#divModalSendMessage").modal("show");
+            });
+
+            $("#btnSendMessage").click(function () {
+                $(this).hide();
+                $(this).closest("div").find(".imgLoading").show();
+
+                $.ajax({
+                    url: "/az/services/JSFeedback/",
+                    type: 'POST',
+                    dataType: 'json',
+                    data:
+                    {
+                        Name: $("#Name").val(),
+                        Message: $("#Message").val(),
+                        ProcedureName: 'NƏQLİYYAT, RABİTƏ VƏ Y&#220;KSƏK TEXNOLOGİYALAR NAZİRLİYİ',
+                        ServiceName: 'Mobil cihazların IMEI kodunun yoxlanılması',
+                        ServiceRegisterName: 'c_imei_check.v1',
+                        ServiceID: '3130',
+                        txtMail: $("#txtMail").val(),
+                        txtPhone: $("#txtPhone").val()
+                    },
+                    success: function (result) {
+                        if (result.message == "OK") {
+                            $("#btnSendMessage").show();
+                            $("#btnSendMessage").closest("div").find(".imgLoading").hide();
+                            $("#divModalSendMessage").modal("hide");
+
+                            BootstrapDialog.show({
+                                title: 'Məlumat',
+                                message: 'Müraciətiniz göndərildi',
+                                type: BootstrapDialog.TYPE_SUCCESS
+                            });
+                        }
+                        else {
+                            $("#btnSendMessage").show();
+                            $("#btnSendMessage").closest("div").find(".imgLoading").hide();
+
+                            $("#divModalSendMessage .alert-danger").text(result.message);
+                            $("#divModalSendMessage .alert-danger").show();
+                        }
+                    }
+                });
+            });
+
+            //var srcTest = $("#ServiceScreen").attr("src").toLowerCase();
+            //var tokenTest = getParameterByName("token", srcTest);
+            //alert(tokenTest);
+            //CheckTokenUsed(getParameterByName("token", $("#ServiceScreen").attr("src").toLowerCase()), 1000);
+            //alert(doesConnectionExist($("#ServiceScreen").attr("src").toLowerCase()));
+            //alert(checkNetConnection($("#ServiceScreen").attr("src")));
+
+            $.ajax({
+                url: "/az/services/JSGetServiceStatistic/",
+                type: 'POST',
+                dataType: 'json',
+                data:
+                {
+                    serviceID: '3130',
+                    type: 1
+                },
+                success: function (result) {
+                    if (result.message == "OK") {
+                        $("#aStatisticDaily").text(result.data);
+                    }
+                    else {
+                        $("#aStatisticDaily").text('Xəta baş verdi');
+                        $("#aStatisticDaily").css('color', 'red');
+                    }
+                }
+            });
+
+
+
+            $(".aServiceStatictic").click(function () {
+
+                var htmlModalMessage = '<table id="tableStatistic" style="width: 290px;"><tr><td><p>G&#252;n ərzində istifadə sayı </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticDaily"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Tarix : 08.10.2017"></span></td></tr>';
+                htmlModalMessage = htmlModalMessage + '<tr><td><p>Həftəlik istifadə sayı </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticWeakly"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Tarix aralığı : 02.10.2017-08.10.2017"></span></td></tr>';
+                htmlModalMessage = htmlModalMessage + '<tr><td><p>Aylıq istifadə sayı  </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticMonthly"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Tarix aralığı : 01.09.2017-30.09.2017"></span></td></tr>';
+                htmlModalMessage = htmlModalMessage + '<tr><td><p>Cari həftəlik istifadə sayı </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticCurrentWeek"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Tarix aralığı : 09.10.2017-08.10.2017"></span></td></tr>';
+                htmlModalMessage = htmlModalMessage + '<tr><td><p>Cari aylıq istifadə sayı </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticCurrentMonth"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Tarix aralığı : 01.10.2017-08.10.2017"></span></td></tr>';
+                htmlModalMessage = htmlModalMessage + '<tr><td><p>&#220;mumi istifadə sayı </p></td><td><span style="font-weight:bold;" id="spnServiceStaticticAll"><img src="/Content/Images/LoadingLittle.gif" /></span></td><td><span class="glyphicon glyphicon-info-sign" style="top: 4px; cursor: pointer; font-size: 16px; color: #428BCA;" title="Xidmətdən &#252;mumi istifadə sayı"></span></td></tr></table>';
+                htmlModalMessage = htmlModalMessage + '<p style="font-weight:bold; margin: 15px 0 0 0;">Məlumatlar 10 dəqiqə intervalına uyğun olaraq yenilənir</p>';
+
+                //7 günlük istifadə sayı
+                //30 günlük istifadə sayı
+
+                //$("#divModalServiceStatisticInformation").modal("show");
+                BootstrapDialog.show({
+                    type: BootstrapDialog.TYPE_PRIMARY,
+                    title: 'Xidmətdən istifadə ilə bağlı ətraflı statistik məlumat',
+                    message: htmlModalMessage,
+                    buttons: [{
+                        label: 'Bağla',
+                        cssClass: 'btn-primary',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }]
+                });
+
+
+                //setTimeout(function () {
+                //    $("#spnServiceStaticticDaily").delay(1000).text(125);
+                //    $("#spnServiceStaticticWeakly").delay(1000).text(458);
+                //    $("#spnServiceStaticticMonthly").delay(1000).text(1469);
+                //    $("#spnServiceStaticticAll").delay(1000).text(45877);
+                //}, 1000);
+
+                setTimeout(function () {
+
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 1
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticDaily").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticDaily").text('Xəta baş verdi');
+                                $("#spnServiceStaticticDaily").css('color', 'red');
+                            }
+                        }
+                    });
+
+
+                }, 1000);
+
+                setTimeout(function () {
+
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 5
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticWeakly").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticWeakly").text('Xəta baş verdi');
+                                $("#spnServiceStaticticWeakly").css('color', 'red');
+                            }
+                        }
+                    });
+
+                }, 1100);
+
+                setTimeout(function () {
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 6
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticMonthly").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticMonthly").text('Xəta baş verdi');
+                                $("#spnServiceStaticticMonthly").css('color', 'red');
+                            }
+                        }
+                    });
+
+                }, 1200);
+
+                setTimeout(function () {
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 7
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticCurrentWeek").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticCurrentWeek").text('Xəta baş verdi');
+                                $("#spnServiceStaticticCurrentWeek").css('color', 'red');
+                            }
+                        }
+                    });
+
+                }, 1300);
+
+                setTimeout(function () {
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 8
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticCurrentMonth").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticCurrentMonth").text('Xəta baş verdi');
+                                $("#spnServiceStaticticCurrentMonth").css('color', 'red');
+                            }
+                        }
+                    });
+
+                }, 1400);
+
+                setTimeout(function () {
+                    $.ajax(
+                    {
+                        url: "/az/services/JSGetServiceStatistic/",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            serviceID: '3130',
+                            type: 4
+                        },
+                        success: function (result) {
+                            if (result.message == "OK") {
+                                $("#spnServiceStaticticAll").text(numberWithSpace(result.data));
+                            }
+                            else {
+                                $("#spnServiceStaticticAll").text('Xəta baş verdi');
+                                $("#spnServiceStaticticAll").css('color', 'red');
+                            }
+                        }
+                    });
+
+                }, 1500);
+
+
+            });
+
+
+            //if (navigator.userAgent.indexOf("Firefox") != -1) {
+            //    $("#slcPhonePrefix").css("padding-top", "11px");
+            //}
+
+            $("#errorFrame").hide();
+
+
+            var serviceURL = 'https://services.e-gov.az/tokenidentity/?services=IMEICheckStatus&amp;token=';
+
+            if (serviceURL.indexOf("https://") == -1) {
+                $("#ServiceLoading").hide();
+                if (serviceMessage == '') {
+                    $("#ServiceHttpError").show();
+                }
+            }
+
+
+            if (serviceURL.indexOf("iframe.aspx?") != -1) {
+                var part = serviceURL.substr(serviceURL.indexOf("iframe.aspx?"));
+
+                if (part.indexOf("https") == -1) {
+                    $("#ServiceLoading").hide();
+                    if (serviceMessage == '') {
+                        $("#ServiceHttpError").show();
+                    }
+                }
+
+            }
+
+            //if (frame == 1) {
+            //    //$("#errorFrame").hide();
+            //    document.getElementById("ServiceScreen").style.display = '';
+            //}
+            //else if (frame == 0) {
+            //    //$("#errorFrame").show();
+            //    document.getElementById("ServiceScreen").style.display = 'none';
+            //}
+
+            ////iframeError = setTimeout(IframeError, 5000);
+
+            ////serviceMessage = '';//TODO
+            var serviceMessageShowed = false;
+            if (serviceMessage != '') {
+                $("#ServiceScreen").hide();
+
+                //if (navigator.appName == 'Microsoft Internet Explorer') {
+                //    window.frames[0].document.execCommand('Stop');
+                //} else {
+                //    window.frames[0].stop();
+                //}
+                if (typeof (window.frames[0].stop) === 'undefined') {
+                    //Internet Explorer code
+                    setTimeout(function () { window.frames[0].document.execCommand('Stop'); }, 100);
+                } else {
+                    //Other browsers
+                    setTimeout(function () { window.frames[0].stop(); }, 100);
+                }
+
+                $("#ServiceLoading").hide();
+
+                $("#errorFrame").html(serviceMessage);
+                $("#errorFrame").show();
+                serviceMessageShowed = true;
+                //$("#ServiceLoading").hide();
+            }
+
+
+            if (serviceMessageShowed == false && '' != '') {
+
+                $("#ServiceScreen").hide();
+
+                //if (navigator.appName == 'Microsoft Internet Explorer') {
+                //    window.frames[0].document.execCommand('Stop');
+                //} else {
+                //    window.frames[0].stop();
+                //}
+                if (typeof (window.frames[0].stop) === 'undefined') {
+                    //Internet Explorer code
+                    setTimeout(function () { window.frames[0].document.execCommand('Stop'); }, 100);
+                } else {
+                    //Other browsers
+                    setTimeout(function () { window.frames[0].stop(); }, 100);
+                }
+                $("#ServiceLoading").hide();
+
+                $("#errorFrame").html('');
+                $("#errorFrame").show();
+
+                serviceMessageShowed = true;
+            }
+
+
+            if (serviceMessageShowed == false && '3130' != '3668') {
+                CheckTokenUsed(getParameterByName("token", $("#ServiceScreen").attr("src").toLowerCase()), 15000);
+            }
+
+            var redirectURL = '';
+            if (serviceMessageShowed == false && redirectURL != '') {
+                $("#ServiceScreen").hide();
+
+                //if (navigator.appName == 'Microsoft Internet Explorer') {
+                //    window.frames[0].document.execCommand('Stop');
+                //} else {
+                //    window.frames[0].stop();
+                //}
+                if (typeof (window.frames[0].stop) === 'undefined') {
+                    //Internet Explorer code
+                    setTimeout(function () { window.frames[0].document.execCommand('Stop'); }, 100);
+                } else {
+                    //Other browsers
+                    setTimeout(function () { window.frames[0].stop(); }, 100);
+                }
+                $("#ServiceLoading").hide();
+
+
+                //$("#divMessage").html('Xidmət başqa səhifəyə yönləndirildi');
+                //$("#divMessage").show();
+
+                //var newWin = window.open();
+                //newWin.location = redirectURL;
+
+                showIframeOnSuccess = false;
+                $("#aRedirectAnotherPage").attr("href", redirectURL);
+                $("#divRedirectButton").show();
+
+                serviceMessageShowed = true;
+            }
+
+
+        });
+
+
+
+        function LoadingSuccess() {
+            document.getElementById("ServiceLoading").style.display = 'none';
+            document.getElementById("ServiceHttpError").style.display = 'none';
+            ////clearTimeout(iframeError);
+        }
+
+        //$(function () {
+        //    $('a[rel*=leanModal]').leanModal({ top: 50, closeButton: ".modal_close" });
+        //});
+
+        function FeedBackOnSucces() {
+            if (document.getElementById("ErrorMsg").innerHTML.length < 3) {
+                document.getElementById("FrmFeedBack").style.display = 'none';
+                document.getElementById("PnlSucces").style.display = 'block';
+            }
+        }
+
+        function FeedBackOnBegin() {
+            document.getElementById("Message").value = "";
+            //document.getElementById("ErrorMsg").innerHTML = "";
+            //document.getElementById("FrmFeedBack").style.display = 'block';
+            //document.getElementById("PnlSucces").style.display = 'none';
+            //document.getElementById("UpdtProgres").style.display = 'none';
+
+
+
+
+
+
+            document.getElementById("Name").value = "";
+            document.getElementById("txtPhone").value = "";
+            document.getElementById("txtMail").value = "";
+
+
+        }
+        //document.getElementById("Message").value = "";
+        //}
+    </script>
+    <style>
+        .service-menu a {
+            text-decoration: none;
+        }
+
+        .disableHelp {
+            color: silver !important;
+        }
+
+            .disableHelp span {
+                opacity: 0.2 !important;
+                filter: alpha(opacity=20) !important; /* For IE8 and earlier */
+            }
+
+        #tableStatistic tr td p {
+            margin: 0;
+        }
+
+        #tableStatistic tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        #tableStatistic tr td:last-child {
+            width: 28px;
+            text-align: right;
+        }
+
+        #tableStatistic tr td {
+            padding: 0px 0 5px 0;
+        }
+    </style>
+
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body style="min-width: 1000px;">
+    <header>
+        <div class="first-hd">
+            <div class="center width clearfix">
+                <div style="margin: 10px 0px 0 0; float: left;">
+                    <a lang="az" class="lang langActive" href="https://www.e-gov.az/az" style="margin-right: 10px;">AZ</a>
+                    <a lang="en" class="lang" href="https://www.e-gov.az/en/services/read/3130/0">EN</a>
+                </div>
+                <div class="btns">
+                    <a href="https://reg.e-gov.az/register/">QEYDİYYAT</a>
+
+                    <a href="https://www.e-gov.az/az/login/index?return=/az/services/read/3130/0" class="btn2">PORTALA GİRİŞ</a>
+                </div>
+                <span class="message" style="width: 620px !important; margin: 10px 50px 0 0 !important;">
+                    Xoş gəldiniz, təqdim olunan bütün xidmətlərdən istifadə etmək üçün sistemə daxil olmalısınız
+                </span>
+            </div>
+        </div>
+        <div class="second-hd">
+            <div class="center width clearfix">
+                <div class="logo" style="width: 210px;">
+                    <a href="https://www.e-gov.az/az">
+                        <img src="Preview/logo.png" title="Əsas səhifə">
+                    </a>
+                </div>
+                <div class="sh-links">
+                    <a href="https://www.e-gov.az/az/services/index/?t=citizen">Vətəndaş</a>
+                    <span>| </span>
+                    <a href="https://www.e-gov.az/az/services/index/?t=business">Sahibkar</a>
+                    <span>| </span>
+                    <a href="https://www.e-gov.az/az/services/index/?t=non-residents">Qeyri rezident</a>
+                </div>
+                <div class="sh-right">
+
+                    <div style="position:relative; float: left; margin: 0 2px 0 17px; width: 154px; text-align: center; border-radius: 4px; -webkit-border-radius: 4px; height: 44px; padding: 5px 3px 0 3px; -moz-border-radius: 4px;">
+                        <div style="font-size: 11px; margin-bottom: 2px; text-align: left;">Xidmətlərə müraciət sayı</div>
+
+                        <div id="spnServiceUsageCountNew" style="margin: 0; text-align: left;">
+                            <div id="spnServiceUsageCountNewChild" style="visibility: visible; margin: 0px;" class="flip-clock-wrapper"><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">1</div></div><div class="down"><div class="shadow"></div><div class="inn">1</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">5</div></div><div class="down"><div class="shadow"></div><div class="inn">5</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">4</div></div><div class="down"><div class="shadow"></div><div class="inn">4</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">9</div></div><div class="down"><div class="shadow"></div><div class="inn">9</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">9</div></div><div class="down"><div class="shadow"></div><div class="inn">9</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">3</div></div><div class="down"><div class="shadow"></div><div class="inn">3</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">1</div></div><div class="down"><div class="shadow"></div><div class="inn">1</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">2</div></div><div class="down"><div class="shadow"></div><div class="inn">2</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">7</div></div><div class="down"><div class="shadow"></div><div class="inn">7</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">8</div></div><div class="down"><div class="shadow"></div><div class="inn">8</div></div></a></li></ul></div>
+
+                        </div>
+                    </div>
+
+
+                    <div style="position:relative; display: block; float: left; margin-left: 22px; text-align: center; width: 112px; height: 44px; padding: 5px 0 0 0; -webkit-border-radius: 4px;">
+                        <div style="font-size: 11px; margin-bottom: 2px; text-align: left;">Günlük zəng sayı</div>
+
+                        <div id="divCallCountNew" style="margin: 0; text-align: left;">
+                            <div id="divCallCountNewChild" style="visibility: visible; margin: 0px;" class="flip-clock-wrapper"><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">1</div></div><div class="down"><div class="shadow"></div><div class="inn">1</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">7</div></div><div class="down"><div class="shadow"></div><div class="inn">7</div></div></a></li></ul><ul class="flip  play"><li class="flip-clock-before"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">0</div></div><div class="down"><div class="shadow"></div><div class="inn">0</div></div></a></li><li class="flip-clock-active"><a href="https://www.e-gov.az/az/services/read/3130/0#"><div class="up"><div class="shadow"></div><div class="inn">6</div></div><div class="down"><div class="shadow"></div><div class="inn">6</div></div></a></li></ul></div>
+
+                        </div>
+                    </div>
+
+                    <a style="margin: 8px 0 0 0px;" title="Onlayn Zəng Mərkəzi" target="_blank" href="http://157.rabita.az/">
+                        <img src="Preview/157.png">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <nav class="menu">
+            <ul class="width center clearfix">
+                <li>
+                    <a href="https://www.e-gov.az/az">
+                        <img src="Preview/home.png" title="Əsas səhifə">
+                    </a>
+                    <span class="sm-arrow" style="display: none;"></span>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az#">Elektron hökumət</a><span class="sm-arrow" style="display: none;"></span>
+                    <ul style="">
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/2">Ümumi məlumat</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/7">Xidmət təminatçıları</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/10">Qeydiyyat məntəqələri</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/44">Təlimatlar</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az/news">Xəbərlər</a><span class="sm-arrow" style="display: none;"></span>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az#">Reyestr və aktlar</a><span class="sm-arrow" style="display: none;"></span>
+                    <ul style="">
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/13">Dövlət reyestrləri</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/12">Elektron Xidmətlər Reyestri</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/15">Normativ-hüquqi aktların layihələri</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az#">Elektron imza</a><span class="sm-arrow" style="display: none;"></span>
+                    <ul style="">
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/5">Ümumi məlumat</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/14">Mobil identifikasiya</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/11">Tələb olunan proqramlar</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/16">E-imza sertifikatının yoxlanılması</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az#">Sənədlər</a><span class="sm-arrow" style="display: none;"></span>
+                    <ul style="">
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/25">Qanunvericilik</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/37">Normativ-hüquqi sənədlər</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az#">Media</a><span class="sm-arrow" style="display: none;"></span>
+                    <ul style="">
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/56">Press-relizlər</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/63">Elanlar</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/news">Xəbərlər</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/68">Müsahibələr və süjetlər</a>
+                        </li>
+                        <li>
+                            <a href="https://www.e-gov.az/az/content/read/49">Keçirilmiş müsabiqələr</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.e-gov.az/az/page/contact">Əlaqə</a><span class="sm-arrow" style="display: none;"></span>
+                </li>
+
+
+            </ul>
+        </nav>
+
+        <div class="src-block">
+            <div class="sb-bg">
+                <div class="src-kyws">
+                    Ən çox axtarılan xidmətlər:
+
+                    <a title="Əmək müqaviləsi bildirişlərinin qeydiyyata alınması və bu barədə işəgötürənə məlumatın verilməsi" href="https://www.e-gov.az/az/services/read/3188">Əmək müqaviləsi bildirişləri ...</a>
+                    <a title="Mobil cihazların qeydiyyatdan keçirilməsi" href="https://www.e-gov.az/az/services/read/3273">Mobil cihazların qeydiyyatda ...</a>
+                    <a title="Ünvanlı sosial yardımla bağlı müraciətin edilməsi" href="https://www.e-gov.az/az/services/read/3421">Ünvanlı sosial yardımla bağl ...</a>
+
+                </div>
+                <div class="src">
+                    <form method="get" action="https://www.e-gov.az/az/home/search" id="frmSearch">
+                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" class="tt-hint" readonly="" autocomplete="off" spellcheck="false" tabindex="-1" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: url(&quot;https://www.e-gov.az/ContentNew/Pics/src-bg.png&quot;) 0% 0% / auto repeat-x scroll padding-box border-box rgba(0, 0, 0, 0);"><input id="keywords" name="q" type="text" placeholder="Xidmət axtarışı" class="tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Noto Sans&quot;; font-size: 16px; font-style: italic; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none; right: auto;"><div class="tt-dataset-keywords"></div></span></span>
+                        <button></button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+
+
+
+
+        <div class="page-navbar">
+            <div class="width center">
+                <a href="https://www.e-gov.az/az">E-Gov</a> <span></span><a href="https://www.e-gov.az/az/services/index#268">E-XİDMƏTLƏR</a> <span></span><a style="text-decoration: none;">NƏQLİYYAT, RABİTƏ VƏ YÜKSƏK TEXNOLOGİYALAR NAZİRLİYİ</a>
+            </div>
+        </div>
+        <div class="inner-block center width">
+            <h2>Xidmətə test baxış modulu</h2>
+            <span class="page-desc">
+                XidmMövcud modul vasitəsilə elektron xidmətə ön baxış keçirə bilərsiniz.
+            </span>
+            <div class="service-menu">
+                <a class="disableHelp">
+                    <span>
+                        <img src="Preview/sico1.png" title="Əks əlaqə">
+                    </span>Əks əlaqə
+                </a>
+                <a target="_blank" href="http://youtu.be/DP0Q5PiLmuQ">
+                    <span>
+                        <img src="Preview/sico2.png" title="Video təlimat">
+                    </span>Video təlimat
+                </a>
+
+                <a target="_blank" href="https://www.e-gov.az/home/getfile/1930">
+                    <span>
+                        <img src="Preview/sico3.png" title="İstifadə Təlimatı">
+                    </span>İstifadə Təlimatı
+                </a>
+                <a class="disableHelp">
+                    <span>
+                        <img src="Preview/sico4.png" title="Reqlament">
+                    </span>Reqlament
+                </a>
+
+                <a style="cursor: pointer;" title="Xidmətdən istifadə ilə bağlı ətraflı statistik məlumat" class="aServiceStatictic">
+                    <span>
+                        <img style="height: 20px;" src="Preview/progress.png" title="Xidmətdən istifadə ilə bağlı ətraflı statistik məlumat">
+                    </span>İstifadə sayı : <strong id="aStatisticDaily">1920</strong>
+                </a>
+            </div>
+
+
+
+            <!-- style - silersiz iframei include edenden sonra  padding: 50px; border: 1px solid #ccc;-->
+            <div class="service-iframe" style="margin: 50px 0 0 0;">
+                <div id="ServiceLoading" style="display: none;">
+                    <img src="Preview/LoadingLittle.gif" class="alignMiddle">
+                    Xidmət yüklənir...
+                </div>
+                <div id="ServiceHttpError" style="display: none; font-size: 17px; color: rgb(92, 92, 92); margin: 20px 0px 20px; background-color: #FFE1E1; padding: 16px;">
+                    Bu xidməti istifadə etmək üçün brouzerin özünü bloklama funksiyasını deaktiv etmək lazımdır.
+                    &nbsp;
+                    <a href="https://www.e-gov.az/az/content/read/46" target="_blank" style="color: blue;">Buradan baxa bilərsiniz</a>
+                </div>
+                <iframe onload="LoadingSuccess();" id="ServiceScreen" src="http://localhost:4495/E-Services/EGOVLogin/?s=AdoptionForeign" frameborder="0" scrolling="no" style="visibility: visible; width: 100%; border-width: 0px; height: 682px;"></iframe>
+                <div id="errorFrame" class="textBox" style="font-size: 17px; color: rgb(92, 92, 92); margin: 6px 0px 60px; background-color: #FFE1E1; padding: 16px; display:none;">Xidmətə qoşulma alınmadı.</div>
+                <div id="divMessage" class="textBox" style="font-size: 17px; color: rgb(47, 105, 164); margin: 6px 0px 60px; padding: 16px; display:none;"></div>
+                <div id="divRedirectButton" style="display:none; margin: -10px 0 15px 0;">
+                    <a target="_blank" href="https://www.e-gov.az/az/services/read/3130/0#" id="aRedirectAnotherPage" class="btn btn-primary">Xidmətə keçid</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- content end -->
+    <footer>
+        <div class="width center clearfix">
+
+            <h2>FAYDALI KEÇIDLƏR</h2>
+            <div class="foo-block">
+                <ul>
+                    <li><a href="https://www.e-gov.az/az/content/read/49">Keçirilmiş müsabiqələr</a></li>
+                    <li><a href="https://www.e-gov.az/az/UserProfile/RestorePassword">Şifrənin bərpası</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/9">Ən çox verilən suallar</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/7">Xidmət təminatçılarının siyahısı</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/10">E-Gov qeydiyyat məntəqələri</a></li>
+                </ul>
+            </div> <div class="foo-block">
+                <ul>
+                    <li><a href="https://www.e-gov.az/az/content/read/2">Elektron hökümət haqqında ümumi məlumat</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/37">Normativ-hüquqi sənədlər</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/6">Autentifikasiya vasitələri hansılardır?</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/13">Dövlət reyestrləri</a></li>
+                    <li><a href="https://www.e-gov.az/az/content/read/25">Qanunvericilik</a></li>
+                </ul>
+            </div> <div class="foo-block">
+                <ul></ul>
+            </div>
+
+
+            <div class="foo-block">
+                <a target="_blank" href="https://www.facebook.com/egov.az?fref=ts">
+                    <img src="Preview/ico1.png">
+                </a>
+                <a target="_blank" href="https://www.youtube.com/user/elektronhokumet">
+                    <img src="Preview/ico2.png">
+                </a>
+                <a target="_blank" href="https://twitter.com/e_govaz">
+                    <img src="Preview/ico3.png">
+                </a>
+                <a title="e-gov.az1" href="skype:e-gov.az1?call">
+                    <img src="Preview/ico4.png">
+                </a>
+                <a href="https://www.e-gov.az/az/page/contact">
+                    <img src="Preview/ico5.png">
+                </a>
+                <p class="adress clearfix">
+                    <img src="Preview/ico6.png">
+                    <span>
+                        Azərbaycan, Bakı
+                        <br>
+                        Dilarə Əliyeva küç. 185
+                    </span>
+                </p>
+                <a target="_blank" href="http://mincom.gov.az/">
+                    <img src="Preview/rytn.png">
+                </a>
+            </div>
+        </div>
+
+    </footer>
+    <div class="foo-bottom-line">
+        <div class="width center clearfix">
+            <a target="_blank" href="http://rabita.az/">
+                <img src="Preview/LogoBottomLeft.png">
+            </a>
+
+            <div class="certs">
+                <a href="http://www.iso.org/iso/catalogue_detail?csnumber=46486">
+                    <img src="Preview/cert1.png">
+                </a>
+                <a href="http://www.iso.org/iso/home/standards/management-standards/iso27001.htm">
+                    <img src="Preview/iso27001.png">
+                </a>
+                <a href="http://www.ripe.net/">
+                    <img src="Preview/cert2.png">
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="popbg"></div>
+    <div class="popup" style="top: 68.5px;">
+        <div class="popupclose"></div>
+        <div class="popresponse">
+            <!-- popup content dinamic code -->
+            <div class="login-cont">
+                <h2>İSTİFADƏÇİ GİRİŞİ</h2>
+                <div class="login-methods">
+                    <div class="login-item">
+                        <a href="javascript:void(0)">
+                            <figure>
+                                <img src="Preview/login-ico1.png">
+                            </figure>
+                            <span class="login-desc">RYTN tərəfindən verilmiş elektron imza kartı ilə daxil olmaq</span>
+                        </a>
+                        <span class="login-help">
+                            <a href="https://www.e-gov.az/az/services/read/3130/0#">
+                                <img src="Preview/info-ico.png">Necə əldə etməli?
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="login-item">
+                        <a href="javascript:void(0)">
+                            <figure>
+                                <img src="Preview/login-ico2.png">
+                            </figure>
+                            <span class="login-desc">Asan imza ilə daxil olmaq</span>
+                        </a>
+                        <span class="login-help">
+                            <a href="https://www.e-gov.az/az/services/read/3130/0#">
+                                <img src="Preview/info-ico.png">Necə əldə etməli?
+                            </a>
+                        </span>
+                    </div>
+                    <div class="login-item">
+                        <a href="javascript:void(0)">
+                            <figure>
+                                <img src="Preview/login-ico3.png">
+                            </figure>
+                            <span class="login-desc">Elektron hökumət sistemi tərəfindən vətəndaşa verilmiş istifadəçi adı və şifrə ilə daxil olmaq</span>
+                        </a>
+                        <span class="login-help">
+                            <a href="https://www.e-gov.az/az/services/read/3130/0#">
+                                <img src="Preview/info-ico.png">Necə əldə etməli?
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="login-item">
+                        <a href="javascript:void(0)">
+                            <figure>
+                                <img src="Preview/login-ico4.png">
+                            </figure>
+                            <span class="login-desc">Smartfon və planşetlər üçün mobil autentifikasiya sertifikatı ilə daxil olmaq</span>
+                        </a>
+                        <span class="login-help">
+                            <a href="https://www.e-gov.az/az/services/read/3130/0#">
+                                <img src="Preview/info-ico.png">Necə əldə etməli?
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="login-item">
+                        <a href="javascript:void(0)">
+                            <figure>
+                                <img src="Preview/login-ico5.png">
+                            </figure>
+                            <span class="login-desc">Smartfon ilə daxil olma</span>
+                        </a>
+                        <span class="login-help">
+                            <a href="https://www.e-gov.az/az/services/read/3130/0#">
+                                <img src="Preview/info-ico.png">Necə əldə etməli?
+                            </a>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <!-- content end -->
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="myErrorTextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Xətanın göndərilməsi</h4>
+                </div>
+                <div class="modal-body" id="myErrorTextModalBody">
+                    <form method="post" id="frmErrorTextModalBody">
+                        <div class="form-item" style="display: none;">
+                            <div>
+                                <label>URL</label>
+                                <input id="txtErrorURL" name="txtErrorURL" value="https://www.e-gov.az/az/services/read/3130/0" readonly="" style="cursor:no-drop;" type="text">
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <div>
+                                <label>Seçilən mətn</label>
+                                <textarea id="taErrorSelectedText" name="taErrorSelectedText" readonly="" style="height: 100px; cursor: no-drop;"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <div>
+                                <label>Qeyd</label>
+                                <textarea id="taErrorMessage" name="taErrorMessage" style="height: 100px; background: #FFFFFF;"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bağla</button>
+                    <button id="btnSendErrorTextModal" type="button" class="btn btn-primary">Göndər</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var langScript = 'az';
+    </script>
+    <script src="Preview/custom.js.download"></script>
+
+
+    <!-- online chat  -->
+    <div class="online-btn" style="width: 200px;">
+        <img src="Preview/icon1.png">
+        Onlayn konsultasiya
+    </div>
+    <div class="online-content" style="width: 500px; height: 500px">
+        <div class="oc-header">
+            <img src="Preview/icon1.png">
+            <span class="oc-operator" id="LblName">Onlayn konsultasiya</span>
+            <img src="Preview/min.png" style="float: right; cursor: pointer" height="25px" id="min">
+        </div>
+        <div class="oc-body" style="width: 500px; height: 420px">
+            <iframe width="100%" height="100%" frameborder="0" style="border: 0" src="Preview/home.html" id="ifrm"></iframe>
+        </div>
+    </div>
+    <script src="Preview/online.js.download"></script>
+    <!-- online chat end -->
+
+    <script>
+
+
+        function ShowCertificateAlertDialog() {
+            if ($.cookie('CertificateAlertDialog') != null && $.cookie('CertificateAlertDialog') == 'true') {
+                $.cookie('CertificateAlertDialog', 'false', { path: '/' });
+                BootstrapDialog.show({
+                    type: BootstrapDialog.TYPE_PRIMARY,
+                    closeByBackdrop: false,
+                    closeByKeyboard: false,
+                    title: 'Məlumat',
+                    message: 'Hörmətli istifadəçi, sizin "" sertifikatınızın etibarlılıq müddəti <span style="color:red; font-weight: bold;"></span> tarixində bitir',
+                    buttons: [{
+                        label: 'Bağla',
+                        action: function (dialogItself) {
+                            dialogItself.close();
+                        }
+                    }]
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            ShowCertificateAlertDialog();
+        });
+    </script>
+
+</body>
+</html>

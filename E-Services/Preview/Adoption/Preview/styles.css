@@ -1,0 +1,779 @@
+﻿.content {
+    width: 99%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.keyboard_center ul li {
+    font-size: 10pt !important;
+}
+
+input:not([type]), input[type="color"], input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"] {
+    background: #fff;
+    border: 1px solid #b8b8b8;
+    border-radius: 3px;
+    padding: 5px;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    transition: all 0.3s linear !important;
+}
+
+    input:not([type]):focus, input[type="color"]:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="tel"]:focus, input[type="url"]:focus, textarea:focus {
+        -moz-box-shadow: 0px 0px 8px #a4bbe2;
+        -webkit-box-shadow: 0px 0px 8px #a4bbe2;
+        box-shadow: 0px 0px 8px #a4bbe2;
+        border: 1px solid #a4bbe2;
+    }
+
+
+.btnKiosk {
+    padding: 15px 25px 0 26px;
+    height: 59px;
+    background: #39a92b;
+    border-bottom: 5px solid #2f8b23;
+    font-size: 18px;
+    position: relative;
+    top: -8px;
+}
+
+    .btnKiosk:hover {
+        color: #fff;
+        background: #39a92b;
+    }
+
+.inputKiosk {
+    margin: 10px auto 0 auto;
+    height: 59px;
+    font-size: 34px;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.droplistKiosk {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    height: 59px;
+    font-size: 26px;
+    font-weight: 200;
+    border-radius: 10px;
+    border: 1px solid #5AC4F2;
+}
+
+
+#egovBox {
+    min-height: 600px;
+}
+
+.MessageAlert {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 25px;
+    font-size: 10pt;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    z-index: 999999;
+    box-shadow: 1px 1px 4px 1px rgba(106,106,106,0.5);
+    opacity: 0.97;
+}
+
+.addressSub {
+    color: #6F6F6F;
+    font-size: 8pt;
+}
+
+.saveButton {
+    background-color: #F4F4F4;
+    padding: 10px;
+    margin: -25px;
+    margin-top: 17px;
+}
+
+.Chekbx input[type=checkbox] {
+    border: 1px solid #CCCCCC;
+    width: 29px;
+    height: 23px;
+    margin: 0px 0px 1px 0px;
+    text-align: center;
+}
+
+.Detail {
+    padding: 14px 13px 10px 34px !important;
+    margin: 40px 12px 12px 12px;
+    height: 530px;
+}
+
+    .Detail .Img {
+        float: right;
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+
+    .Detail .Items {
+        width: 75%;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #F3F3F3;
+        float: left;
+        padding: 10px 10px 10px 0px;
+        font-size: 9pt;
+    }
+
+        .Detail .Items .Krit {
+            margin: 10px 10px 10px 0px;
+            float: left;
+            width: 40%;
+            color: #A2A2A2;
+            font-size: 12pt;
+        }
+
+        .Detail .Items .Vals {
+            margin: 10px;
+            float: left;
+            width: 55%;
+            color: #2D2D2D;
+            font-size: 11pt;
+        }
+
+    .Detail .Terms {
+        border-width: 0px;
+        margin-top: 45px;
+        padding-left: 0px;
+        font-size: 12pt;
+        font-style: italic;
+        color: #000000;
+    }
+
+    .Detail .BtnSuccess {
+        float: right;
+        margin-top: 45px;
+    }
+
+.borderCorner {
+    border: 1px solid #CCCCCC;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    border-radius: 9px 9px 9px 9px;
+    /*padding-right: 5px;
+    padding-left: 5px;*/
+}
+
+.boxShadow {
+    background: none repeat scroll 0 0 #FFFFFF;
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 10px;
+    top: 0px;
+    left: -3px;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+
+/*Admin*/
+
+.login-holder {
+    background-color: #555555;
+    height: 250px;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 80px;
+    border-radius: 10px;
+}
+
+.txtbox-holder {
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 42px;
+}
+
+/*-------------------*/
+.ChekHistorySearch {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
+    clear: both;
+}
+
+    .ChekHistorySearch .clearLeft {
+        clear: left;
+    }
+
+    .ChekHistorySearch li:not(.NoStyle) {
+        padding: 5px;
+        margin: 0 16px 10px 0;
+        border: 1px solid #CCCCCC;
+        background-color: #FFFFFF;
+        float: left;
+        width: 262px;
+        height: 68px;
+        -webkit-box-shadow: 5px 5px 2px 0 rgba(191, 191, 191, 0.75);
+        -moz-box-shadow: 5px 5px 2px 0 rgba(0,0,0,0.75);
+        box-shadow: 5px 5px 2px 0 rgba(232, 232, 232, 0.75);
+    }
+
+        .ChekHistorySearch li:not(.NoStyle):hover {
+            background-color: #EEEEEE;
+        }
+
+    .ChekHistorySearch .NoStyle {
+        margin: -14px;
+        padding: 10px;
+        clear: left;
+    }
+
+.cursorRePointer {
+    cursor: default !important;
+}
+
+.Gridpager table {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.Gridpager a {
+    color: #000000;
+    padding: 5px;
+    margin: 10px 1px 1px 1px;
+    background-color: #dcdddf;
+    text-align: center;
+    text-decoration: none;
+}
+
+.Gridpager span {
+    padding: 5px;
+    margin: 10px 1px 1px 1px;
+    background-color: #f9be37;
+    color: #000000;
+    text-align: center;
+}
+
+.hoverLink {
+    cursor: pointer;
+}
+
+    .hoverLink:hover {
+        background: #EDF3FA;
+    }
+
+.ChkBoxStyle input {
+    border: 1px solid #CCCCCC;
+    width: 29px;
+    height: 23px;
+    margin: 11px 1px 1px 3px;
+    text-align: center;
+}
+
+.ChkBoxStyle label {
+    display: block;
+    margin-top: -36px;
+    margin-bottom: 13px;
+    background-color: whitesmoke;
+    border: solid 1px #E7E7E7;
+    padding: 10px;
+    padding-left: 44px;
+    padding-right: 60px;
+}
+
+    .ChkBoxStyle label:hover {
+        background-color: #FCFCFC;
+        cursor: pointer;
+    }
+
+.FileUpForm .Sec {
+    margin-bottom: 10px;
+}
+
+.Red {
+    color: red;
+}
+
+
+.okStil {
+    padding: 20px;
+    background-color: #F4F4F4;
+    border: solid 1px #D5D5D5;
+}
+
+    .okStil img {
+        float: left;
+        padding-right: 10px;
+        padding-top: 5px;
+    }
+
+    .okStil .okButn {
+        background-color: #fff;
+        width: 160px;
+        height: 65px;
+        float: right;
+        margin: 10px;
+        margin-top: -37px;
+        margin-right: -6px;
+        border: solid 1px silver;
+        cursor: pointer;
+    }
+
+        .okStil .okButn span {
+            font-size: 12pt;
+            margin-top: 12px;
+            margin-left: 10px;
+            padding-top: 10px;
+        }
+
+        .okStil .okButn:hover {
+            background-color: #EBEBEB;
+        }
+
+.alignMiddle {
+    vertical-align: middle;
+}
+
+.boxShadow {
+    background: none repeat scroll 0 0 #FFFFFF;
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 10px;
+}
+
+
+.borderCorner {
+    border: 1px solid #CCCCCC;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    border-radius: 9px 9px 9px 9px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.nonlogin {
+    border: 1px solid #2980b9;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+    .nonlogin p {
+        color: #7f8c8d;
+        font-size: 16px;
+    }
+
+    .nonlogin a {
+        text-decoration: underline;
+        color: #2980b9;
+    }
+
+.search-panel {
+    padding: 5px 0px;
+}
+
+.search-box {
+    border: 1px solid #d7d6d6;
+    padding: 3px;
+    margin: 0px 15px;
+    float: left;
+}
+
+.rule {
+    border: 1px solid #E6E6E6;
+    padding: 15px;
+}
+
+    .rule label {
+        font-weight: bold !important;
+    }
+
+.rules {
+    text-indent: 30px;
+}
+
+
+
+/*********************IMEI Check Status*************************/
+.status_holder {
+    font-family: Arial;
+    width: 969px;
+    background-color: white;
+    padding: 20px 20px;
+}
+
+    .status_holder h3 {
+        font-family: Arial;
+        color: #5d5d5d;
+        margin: 0px;
+        font-size: 18pt;
+        margin-bottom: 25px;
+        font-weight: normal;
+    }
+
+    .status_holder .status_hr {
+        width: 100%;
+        height: 2px;
+        background-color: #9a9a9a;
+        margin-bottom: 47px;
+    }
+
+.imei_status_left, .imei_status_right {
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+}
+
+.phone_status {
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+}
+
+.status_blue {
+    display: block;
+    color: #05587c;
+    font-size: 14pt;
+    font-family: Arial;
+    margin-bottom: -10px;
+}
+
+.imei_status_right img {
+    width: 35px;
+    float: left;
+    margin-right: 15px;
+}
+
+.status_button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #18acec;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 9px;
+    width: 110px;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 50px;
+}
+
+.status_input {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    margin-right: 12px !important;
+    width: 250px !important;
+    height: 50px !important;
+    font-size: 14pt;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+}
+
+.status_input300 {
+    width: 300px !important;
+}
+
+.status_dropdown {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    width: 80px !important;
+    font-size: 14pt;
+    height: 50px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+}
+
+.imei_status_info_label {
+    color: #5d5d5d;
+    font-size: 8pt;
+}
+
+.imei_status_right p {
+    color: #5d5d5d;
+    font-size: 10pt;
+    margin-top: 12px;
+    width: 325px;
+}
+
+.imei_status_right {
+    padding-top: 30px;
+    padding-left: 50px;
+}
+
+.status_success {
+    display: inline-block;
+    width: 100%;
+    background: #ebfad4;
+    font-size: 11pt;
+    font: Arial;
+    color: #22951d;
+    padding: 15px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    border: 1px solid #b1dc76;
+    border-radius: 4px;
+}
+
+.post_tracking {
+    background: #fff;
+    color: #000;
+}
+
+    .post_tracking table {
+        width: 100%;
+    }
+
+
+.status_error {
+    display: inline-block;
+    width: 100%;
+    font-size: 11pt;
+    font: Arial;
+    color: #05587c;
+    padding: 15px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    border: 1px solid red;
+    border-radius: 4px;
+}
+/*********************IMEI Check Status*************************/
+
+
+/*********************Post Tracking Check Status*************************/
+.mail_status_left, .mail_status_right {
+    width: 50%;
+    float: left;
+}
+
+    .mail_status_right img {
+        float: left;
+        margin-top: 4px;
+        margin-right: 15px;
+        width: 52px;
+    }
+
+    .mail_status_right p {
+        color: #5d5d5d;
+        font-size: 10pt;
+    }
+
+.mail_status_right {
+    padding-top: 30px;
+}
+/*********************Post Tracking Check Status*************************/
+
+
+/********************** Imei Register start **********************/
+.imei_reg_status_holder {
+    font-family: Arial;
+    width: 969px;
+    background-color: white;
+    padding: 10px 20px;
+}
+
+    .imei_reg_status_holder h3 {
+        font-family: Arial;
+        color: #5d5d5d;
+        margin: 0px;
+        font-size: 18pt;
+        margin-bottom: 25px;
+        font-weight: normal;
+    }
+
+.imei_reg_status_holder {
+    width: 100%;
+    height: 2px;
+}
+
+.imei_reg_status_left, .imei_reg_status_right {
+    width: 50%;
+    float: left;
+    margin-top: 20px;
+}
+
+.imei_reg_status_blue {
+    display: block;
+    color: #05587c;
+    font-size: 12pt;
+    font-family: Arial;
+    margin-bottom: -5px;
+}
+
+.imei_reg_status_right .littleImg {
+    float: left;
+    margin-top: 13px;
+    margin-right: 15px;
+    width: 30px;
+}
+
+.imei_reg_status_button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #18acec;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 9px;
+    width: 210px;
+    color: white;
+    font-size: 10pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.imei_reg_status_input {
+    padding: 5px 10px !important;
+    box-sizing: border-box !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    margin-right: 12px !important;
+    width: 300px !important;
+    height: 40px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    font-size: 14pt !important;
+}
+
+.imei_reg_status_add_input {
+    padding: 5px 10px !important;
+    box-sizing: border-box !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    margin-right: 12px !important;
+    width: 210px !important;
+    height: 40px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    font-size: 14pt !important;
+}
+
+.imei_reg_status_note {
+    padding: 5px 10px !important;
+    box-sizing: border-box !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    margin-right: 12px !important;
+    width: 300px !important;
+    height: 100px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    font-size: 14pt !important;
+}
+
+.imei_reg_select {
+    padding: 5px 10px !important;
+    box-sizing: border-box !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    margin-right: 12px !important;
+    height: 40px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    font-size: 14pt !important;
+}
+
+.imei_reg_status_dropdown {
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    width: 80px !important;
+    font-size: 14pt;
+    height: 40px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+}
+
+.imei_reg_status_dropdown_pay {
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    width: 300px !important;
+    font-size: 14pt;
+    height: 40px !important;
+    border: 1px solid #18acec !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+}
+
+.imei_reg_status_info_label {
+    color: #5d5d5d;
+    font-size: 8pt;
+}
+
+.imei_reg_status_right p {
+    color: #5d5d5d;
+    font-size: 10pt;
+    margin-top: 17px;
+}
+
+.imei_reg_status_right {
+    padding-top: 30px;
+}
+
+.imei_reg_regular_head {
+    color: #5d5d5d;
+    font-size: 10pt;
+}
+
+.imei_reg_status_left option, select {
+    color: #525252;
+}
+
+.imei_reg_captcha {
+    display: inline-block;
+    position: relative;
+    border-radius: 5px;
+    width: 90px;
+    top: 14px;
+    height: 40px;
+    margin-top: -3px;
+}
+
+.imei_reg_status_success {
+    display: inline-block;
+    width: 100%;
+    font-size: 11pt;
+    font: Arial;
+    color: #05587c;
+    padding: 15px;
+    margin-top: 30px;
+    border: 1px solid #B0DC76;
+    border-radius: 4px;
+}
+
+    .imei_reg_status_success table {
+        width: 100%;
+    }
+
+    .imei_reg_status_success .successImg {
+        float: left;
+        margin-right: 15px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .imei_reg_status_success p {
+        color: #278853;
+        font-size: 15pt;
+        margin-top: 13px !important;
+        font-weight: bold;
+    }
+
+.imei_reg_information {
+    color: #5d5d5d;
+    font-size: 14pt;
+}
+/********************** Imei Register end **********************/

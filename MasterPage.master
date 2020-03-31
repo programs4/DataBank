@@ -1,0 +1,142 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<head id="Head1" runat="server">
+    <title>Elektron Məlumat Bankı </title>
+
+    <!-- CSS -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+
+    <%=@"<link href=""/Css/bootstrap.css"" rel=""stylesheet"" type=""text/css"" />
+         <link href=""/Css/bootstrap-theme.css"" rel=""stylesheet"" />" %>
+
+    <link rel="shortcut icon" href="/Favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="description" lang="az" content="">
+    <meta name="keywords" lang="az" content="">
+    <meta name="robots" content="index, follow">
+
+    <!--  Mobile Viewport Fix -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="/Js/AlertPopup.js"></script>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterHead" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body class="bodyFixPadding" onload="SetLeftBlackPanel();">
+
+    <form id="AspnetForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <div id="alertMessage" class="MessageAlert" style="display: none;">
+            <img src="" id="alertImg" style="margin-bottom: 5px; height: 30px" />
+            <span id="alertText">Məlumatlar yeniləndi</span>
+        </div>
+
+        <asp:Panel ID="PnlHeaderRoot" runat="server" Style="min-width: 780px; box-shadow: 0px 5px 15px #999999;" CssClass="divHeader printStyle">
+
+            <div class="hd-left" style="cursor: pointer; border-right-style: solid; border-right-width: 1px; border-right-color: #FFFFFF;" onclick="window.location.href='/main'">
+                <figure>
+                    <img src="/Pics/Logo.png" />
+                </figure>
+                <span>UŞAQ HÜQUQLARININ HƏYATA KEÇİRİLMƏSİNƏ DAİR
+                    <br>
+                    <span>MƏLUMAT BANKI</span> </span>
+            </div>
+            <div class="hd-left headerFullName">
+                <span>
+                    <asp:Literal ID="LtrUsersName" runat="server"></asp:Literal>
+                    <br>
+                    <span style="color: #d9eff0; font-size: small">
+                        <asp:Literal ID="LtrOrganizationName" runat="server"></asp:Literal>
+                    </span></span>
+            </div>
+
+            <div class="hd-right">
+                <div class="notifies" title="Bu gün üçün aparılmış əməliyyatların sayı">
+                    <a href="/history">
+                        <img src="/pics/ico11.png" />
+                        <asp:Label CssClass="notify" ID="LblNotify" runat="server"></asp:Label></a>
+                </div>
+                <div class="u-menu">
+                    <span class="opener">Şəxsi kabinet
+                    <img src="/Pics/ico4.png"></span>
+
+                    <ul>
+                        <li><a href="/userpanel/?tab=1">Şəxsi məlumatlar</a></li>
+                        <li><a href="/userpanel/?tab=2">Şifrənin dəyişdirilməsi</a></li>
+                        <li><a href="/exit">Çıxış</a></li>
+                    </ul>
+                </div>
+            </div>
+        </asp:Panel>
+
+        <asp:Panel ID="PnlLeft" runat="server" CssClass="mainmenu printStyle" Style="display: none; z-index: 99999">
+
+            <a href="/main" class="m-item">
+                <img src="/pics/leftmenuicon/tasks.png" />
+                <span class="um-text">Əsas səhifə </span>
+            </a>
+
+            <a href="/list" class="m-item">
+                <img src="/pics/leftmenuicon/List.png" />
+                <span class="um-text">Uşaqların siyahısı</span>
+            </a>
+
+            <a href="/list/?search=1" class="m-item">
+                <img src="/pics/leftmenuicon/search.png" />
+                <span class="um-text">Ətraflı axtarış sistemi</span>
+            </a>
+
+         <%--   <a href="/reportslist" class="m-item">
+                <img src="/pics/leftmenuicon/report.png" />
+                <span class="um-text">Hesabatlar</span>
+            </a>--%>
+            <asp:Literal ID="LtrHistory" runat="server">
+            <a href="/history" class="m-item">
+                <img src="/pics/leftmenuicon/history.png" />
+                <span class="um-text">İstifadə tarixçəsi</span>
+            </a>
+            </asp:Literal>
+        </asp:Panel>
+
+        <asp:Panel ID="PnlContent" runat="server" CssClass="content" Style="padding-top: 10px; margin-top: 90px; margin-left: 255px;">
+            <!-- all content here -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderMasterBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </asp:Panel>
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+
+    function SetLeftBlackPanel() {
+        $('.mainmenu').css("height", document.body.scrollHeight);
+    }
+
+    $(window).resize(function () {
+        SetLeftBlackPanel();
+    });
+
+    function SubmitLoading(V) {
+        V.innerHTML = '<img src="/pics/loading.gif" style="width:25px; "/> Proses gedir...';
+    }
+
+</script>

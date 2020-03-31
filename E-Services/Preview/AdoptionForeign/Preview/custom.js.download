@@ -1,0 +1,226 @@
+﻿/**
+ * @author Nasir Aliyev
+ * @copyright 2015
+ */
+
+/* popup */
+
+
+function popPos()
+{
+  Pheight=$('.popup').height();
+  $('.popup').css('top',($(window).height()-Pheight)/2-45 + 'px');
+
+}
+
+function popup(w,h)
+{
+     $('.popupclose').attr('id','');
+     if($.isNumeric(h)) $('.popup').height(h);
+     else
+       $('.popup').height('');
+
+     $('.popup').width(w);
+     $('.popbg').show();
+     $('.popup').show();
+     if($.isNumeric(h))
+       $('.popup').css('top',-h);
+     else
+     {
+
+       $('.popup .popresponse img')
+    	.load(function(){
+    	   popPos();
+    	})
+    	.error(function(){
+    	});
+     }
+
+    popPos();
+
+}
+
+function popclose()
+{
+     /* $('.popup').html('<div class="popupclose"></div><div class="popresponse"></div>') ; */
+     $('.popup').hide();
+     $('.popbg').fadeOut('fast');
+}
+
+$(document).on('click','.popupclose,.popbg,.gp-cancel',function()
+{
+   popclose();
+});
+
+
+$(window).resize(function(){
+popPos();
+});
+
+/* popup end */
+
+
+
+
+/* accordion menu  */
+
+$(document).on('click', '.tab-titles a', function () {
+    
+    id=$(this).attr('id');
+    
+    $('.tab-titles a').removeClass('active');
+    $(this).addClass('active');
+        
+    $('.tab-content').stop().hide();
+    $('.' + id).stop().fadeIn();
+ 
+})
+
+
+$(document).on('click', '.login-popup', function () {
+
+      popup('880','614');
+ 
+});
+
+
+
+var close = true;
+
+$(document).on('mouseenter', 'ul.menu-accordion > li > ul', function () {
+    close = false;
+})
+
+
+$(document).on('mouseleave', 'ul.menu-accordion > li > ul', function () {
+    close = true;
+})
+
+$(document).on('click', 'ul.menu-accordion > li', function () {
+
+    if (close) $('ul.menu-accordion li').removeClass('active');
+    
+    if (!$(this).find('ul').is(':visible')) 
+    {
+        $(".divSearchInGroup").not($(this).find(".divSearchInGroup")).stop().fadeOut("slow");
+        $(".divSearchInGroup").not($(this).find(".divSearchInGroup")).find("input[type='text']").width(200);
+        $(".divSearchInGroup").not($(this).find(".divSearchInGroup")).find("input[type='text']").attr("placeholder", langScript == 'az' ? "axtarış" : 'search');
+
+        $(".divSearchInGroup").not($(this).find(".divSearchInGroup")).each(function () {
+            
+            if ($(this).find("input[type='text']").val() != '') {
+                $(this).find("input[type='text']").val('');
+                $(this).find("input[type='text']").keyup();
+            }
+
+        });
+
+        $('ul.menu-accordion li ul').slideUp("fast");
+        $(this).find('ul').slideDown("fast");
+
+        $(this).closest("li").find(".divSearchInGroup").fadeIn("slow");
+                        
+        $(this).addClass('active');
+    }
+    else if (close)
+    {
+        $('ul.menu-accordion li ul').slideUp("fast");
+        $(this).closest("li").find(".divSearchInGroup").stop().fadeOut("slow");
+        $(this).closest("li").find(".divSearchInGroup").find("input[type='text']").width(200);
+        $(this).closest("li").find(".divSearchInGroup").find("input[type='text']").attr("placeholder", langScript == 'az' ? "axtarış" : 'search');
+
+        if ($(this).closest("li").find(".divSearchInGroup").find("input[type='text']").val() != '') {
+            $(this).closest("li").find(".divSearchInGroup").find("input[type='text']").val('');
+            $(this).closest("li").find(".divSearchInGroup").find("input[type='text']").keyup();
+        }
+    }
+
+})
+
+
+
+$(document).on('mouseenter', 'header nav.menu > ul > li', function () {
+
+    if(!$(this).find('ul').is(':visible')) {
+
+        $('header nav.menu > ul .sm-arrow').hide();
+        $('header nav.menu > ul li ul').slideUp('fast', function () {
+        });
+
+    }
+
+    if($(this).find('ul').size()>0 && !$(this).find('ul').is(':visible')) {
+
+        $(this).find('.sm-arrow').fadeIn('100');
+        $(this).find('ul').slideDown('fast', function () { });
+    }
+
+});
+
+
+$(document).on('mouseleave', 'header nav.menu > ul ', function () {
+
+    $('header nav.menu > ul .sm-arrow').hide();
+    $('header nav.menu > ul li ul').slideUp('fast', function () { });
+
+});
+
+
+
+$(document).on('click', '.logened-user button', function () {
+
+    if(!$('.logened-user').find('ul').is(':visible'))
+        $('.logened-user').find('ul').slideDown('fast', function () { });
+    else
+        $('.logened-user').find('ul').slideUp('fast', function () {});
+
+
+});
+
+
+function showfeedstat()
+{
+    $('div.sender').hide();
+    $('div.feed-stat').fadeIn();
+}
+
+
+
+
+
+$(document).on('click', 'span.serv-arrow', function () {
+
+    obj=$(this).parents('.my-folders li').find('span.icons')
+
+    if (!obj.is(':visible'))
+    {
+        $('span.icons').slideUp("fast");
+        obj.slideDown("fast");
+    }
+    else
+        obj.slideUp("fast");
+
+
+});
+
+
+$(document).on('click', 'span.sr-title', function () {
+
+    obj=$(this).parents('li').find('ul')
+
+    if (!obj.is(':visible'))
+        obj.slideDown("fast");
+    else
+        obj.slideUp("fast");
+
+
+});
+
+
+
+//$(document).on('click', 'a.new-folder', function () {
+
+//    $('.manage-folders').html('<input type="text"> <a href="javascript:void(0)" class="folder-ok"><img src="Pics/serv-ok.png" title="new"></a>');
+
+//});
+
